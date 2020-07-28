@@ -8,25 +8,6 @@ describe('Microsoft Teams', function() {
    * Before visiting SharePoint, we first need to authenticate
    */
   before(() =>  {
-    // Add an on window load event to make sure that we are able to override the iframe check
-    cy.on('window:load', (win: any) => {
-      const checkOverride = () => {
-        if (win.teamspace && win.teamspace.AppController && win.teamspace.AppController.prototype && win.teamspace.AppController.prototype.isInIFrame) {
-          win.teamspace.AppController.prototype.isInIFrame = () => {
-            console.log('Calling the custom iframe check');
-            return false;
-          };
-        } else {
-          console.log('teamspace not available')
-          setTimeout(() => {
-            checkOverride();
-          }, 1);
-        }
-      };
-
-      checkOverride();
-    });
-
     cy.authTeams(PAGE_URL);
   });
   

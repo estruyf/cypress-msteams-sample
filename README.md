@@ -1,5 +1,7 @@
 # Cypress sample to E2E test your Microsoft Teams solutions
 
+![Cypress E2E testing for Microsoft Teams](./assets/msteams.gif)
+
 ## How to start
 
 In order to start using this project. You will have to do the following steps:

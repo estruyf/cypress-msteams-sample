@@ -16,6 +16,26 @@ function getConfig(pageUrl: string): Config {
  * Visit teams
  */
 Cypress.Commands.add("authTeams", (pageUrl) => {
+  // Add an on window load event to make sure that we are able to override the iframe check
+  cy.on('window:load', (win: any) => {
+    const checkOverride = () => {
+      if (win.teamspace && win.teamspace.AppController && win.teamspace.AppController.prototype && win.teamspace.AppController.prototype.isInIFrame) {
+        win.teamspace.AppController.prototype.isInIFrame = () => {
+          console.log('Calling the custom iframe check');
+          return false;
+        };
+      } else {
+        console.log('teamspace not available')
+        setTimeout(() => {
+          checkOverride();
+        }, 1);
+      }
+    };
+
+    checkOverride();
+  });
+
+  // Create and retrieve the config object
   const config = getConfig(pageUrl);
 
   // Call the Microsoft Teams Authentication method in order to retrieve all the cookies and local storage
