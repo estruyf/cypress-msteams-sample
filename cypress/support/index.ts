@@ -22,5 +22,4 @@ Cypress.Cookies.defaults({
 });
 
 // Prevent the clearing the local storage, this creates conflicts for tests
-const clear = Cypress.LocalStorage.clear;
-(Cypress as any).LocalStorage.clear = function (keys, ls, rs) {};
+(Cypress as any).LocalStorage.clear = (keys, ls, rs) => {};
