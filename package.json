@@ -1,0 +1,18 @@
+{
+  "name": "cypress-msteams",
+  "version": "1.0.0",
+  "description": "Sample project to get started with Microsoft Teams E2E testing in Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "author": "Elio Struyf",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/cypress": "1.1.3",
+    "cypress": "4.11.0",
+    "playwright-chromium": "1.2.1",
+    "typescript": "3.9.7"
+  }
+}
