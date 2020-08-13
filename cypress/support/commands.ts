@@ -41,6 +41,18 @@ Cypress.Commands.add("authTeams", (pageUrl) => {
   // Call the Microsoft Teams Authentication method in order to retrieve all the cookies and local storage
   cy.task('TeamsAuth', config).then((data: { cookies: Cookie[], localStorage: KeyValuePair[] }) => {
 
+    // Returns the correct SameSite for Cypress
+    const getCookieSameSite = (sameSite: "Strict" | "Lax" | "None"): Cypress.SameSiteStatus => {
+      switch (sameSite) {
+        case 'Strict':
+          return 'strict';
+        case 'Lax':
+          return 'lax';
+        default:
+          return 'no_restriction';
+      }
+    };
+
     // Let us start clean, and clear all the cookies
     cy.clearCookies();
 
@@ -51,7 +63,8 @@ Cypress.Commands.add("authTeams", (pageUrl) => {
         expiry: cookie.expires,
         httpOnly: cookie.httpOnly,
         path: cookie.path,
-        secure: cookie.secure
+        secure: true, // Fix for Chrome and upcoming Edge versions where SameSite is not set
+        sameSite: getCookieSameSite(cookie.sameSite)
       });
       Cypress.Cookies.preserveOnce(cookie.name);
     });
