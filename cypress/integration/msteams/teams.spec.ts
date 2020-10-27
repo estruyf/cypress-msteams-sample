@@ -16,11 +16,12 @@ describe('Microsoft Teams', function() {
   });
 
   it('2. Check if Microsoft Teams is loaded correctly', () => {
-    cy.get(`[data-tid=newMessageFooter]`).should('exist').click();
+    cy.get(`#new-post-button`).should('exist').click();
   });
 
   it('3. Check if we can start chatting', () => {
-    cy.get('.cke_wysiwyg_div > div').should('exist').click().type('Hello, this is just cool{enter}');
+    cy.get('.cke_wysiwyg_div > div').should('exist').click().type('Hello, this is just cool');
+    cy.get(`#send-message-button`).should('exist').click();
   });
 
   it('3. Check if we can reply to a chat', () => {

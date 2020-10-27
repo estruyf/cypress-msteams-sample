@@ -7,7 +7,7 @@ const selectors = {
   password: `input[name=passwd]`,
   submit: `input[type=submit]`,
   useWebAppLink: `a.use-app-lnk`,
-  teamsElm: `[data-tid=newMessageFooter]`
+  teamsElm: `#new-post-button`
 }
 
 export const TeamsAuth = async function (config: Config): Promise<{ cookies: Cookie[], localStorage: KeyValuePair[] }> {
